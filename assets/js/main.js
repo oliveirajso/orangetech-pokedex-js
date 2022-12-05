@@ -1,9 +1,19 @@
+const pokemonList = document.getElementById("pokemonList");
+const loadMoreButton = document.getElementById("loadMoreButton");
+
 const offset = 0;
 const limit = 10;
-const url = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
-function convertPokemonTypesToList(pokemonType) {
-  return pokemonType.map((typeSlot) => `<li class="type">${typeSlot.type.name}</li>`)
+const maxRecords = 151;
+
+function loadPokemonItens(offset, limit) {
+  pokeApi.getPokemons().then((pokemons = []) => {
+    const newhtml = pokemons.map(convertPokemonToList).join('')
+    pokemonList.innerHTML += newhtml;
+  });
 }
+//default 
+loadPokemonItens(offset, limit);
+
 function convertPokemonToList(pokemon) {
   return `
   <li class="pokemon ${pokemon.type}">
@@ -11,21 +21,15 @@ function convertPokemonToList(pokemon) {
     <span class ="name">${pokemon.name}</span>
     <div class="detail">
      <ol class="types">
-        ${convertPokemonTypesToList(pokemon.types).join('')}
+        ${pokemon.types.map((type) => `<li class="type ${type}">${type}</li>`).join('')}
       </ol>
-    <img src="${pokemon.sprites.other.dream_world.front_default}" alt ="${pokemon.name}">
+    <img src="${pokemon.photo}" alt ="${pokemon.name}">
     </div>
   </li>
     `;
 }
-// ${pokemon.photo}
-const loadMoreButton = document.getElementById("loadMoreButton");
-const maxRecords = 151;
 
-function loadPokemonItens(offset, limit) {
-  pokeApi.getPokemons;
-}
-const pokemonList = document.getElementById("pokemonList");
+
 
 pokeApi.getPokemons().then((pokemons = []) => {
   pokemonList.innerHTML += pokemons.map(convertPokemonToList).join('');

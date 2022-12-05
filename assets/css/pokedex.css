@@ -83,7 +83,6 @@
   flex-direction: column;
   margin: .5rem;
   padding: 1rem;
-  background-color: #49d0b0;
   border-radius: 1rem;
 
 }
@@ -122,7 +121,7 @@
   border-radius: 1rem;
   filter: brightness(1.1);
   text-align: center;
-  background-color: #61e1ca;
+
 }
 
 .pokemon .detail img {
