@@ -1,12 +1,12 @@
 const pokemonList = document.getElementById("pokemonList");
 const loadMoreButton = document.getElementById("loadMoreButton");
 
-const offset = 0;
+let offset = 0;
 const limit = 10;
-const maxRecords = 151;
+const maxRegistros = 151;
 
 function loadPokemonItens(offset, limit) {
-  pokeApi.getPokemons().then((pokemons = []) => {
+  pokeApi.getPokemons(offset, limit).then((pokemons = []) => {
     const newhtml = pokemons.map(convertPokemonToList).join('')
     pokemonList.innerHTML += newhtml;
   });
@@ -25,13 +25,25 @@ function convertPokemonToList(pokemon) {
       </ol>
     <img src="${pokemon.photo}" alt ="${pokemon.name}">
     </div>
-  </li>
-    `;
+  </li>`;
 }
 
+/**
+ * Evento para adicionar mais pokemons na lista
+ */
+loadMoreButton.addEventListener('click', () => {
+  offset += limit;
+  const qtdRegistrosProximaPagina = offset + limit;
+  if (qtdRegistrosProximaPagina >= maxRegistros) {
+    const novoLimite = maxRegistros - offset;
+    loadPokemonItens(offset, novoLimite);
+    loadMoreButton.parentElement.removeChild(loadMoreButton);
+  } else {
+    loadPokemonItens(offset, limit)
+  }
+})
 
 
-pokeApi.getPokemons().then((pokemons = []) => {
-  pokemonList.innerHTML += pokemons.map(convertPokemonToList).join('');
-});
-
+// pokeApi.getPokemons().then((pokemons = []) => {
+//   pokemonList.innerHTML += pokemons.map(convertPokemonToList).join('');
+// });
