@@ -21,6 +21,12 @@ body {
     margin: 1rem auto;
     border-radius: 1rem;
   }
+  .contentDetalhes {
+    max-width: 250px;
+    height: auto;
+    margin: 1rem auto;
+    border-radius: 1rem;
+  }
 }
 
 

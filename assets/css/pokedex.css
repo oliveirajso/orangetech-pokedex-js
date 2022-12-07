@@ -77,7 +77,9 @@
 .fairy {
   background-color: #f9aec7;
 }
-
+.tab {
+  background-color: #fff;
+}
 .pokemon {
   display: flex;
   flex-direction: column;
@@ -164,8 +166,13 @@
 }
 
 @media screen and (min-width: 992px) {
+  
   .pokemons {
     grid-template-columns: 1fr 1fr 1fr 1fr;
+
+  }
+  .detalhes {
+    grid-template-columns: 1fr;
 
   }
 }
